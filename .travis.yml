@@ -1,0 +1,33 @@
+sudo: required
+language: python
+
+python:
+  - "3.6"
+
+services:
+  - docker
+
+install:
+  - docker build -t yafas/build-trigger .
+  - docker run -dit --name build-trigger-ci -v $TRAVIS_BUILD_DIR/.env.ci:/app/.env yafas/build-trigger
+  - docker exec build-trigger-ci pip install coveralls
+
+script:
+  - docker exec build-trigger-ci flake8
+  - docker exec build-trigger-ci coverage run --source trigger -m pytest
+
+after_success:
+  - docker cp build-trigger-ci:/app/.coverage ./
+  - sed -i 's@/app@'"$TRAVIS_BUILD_DIR"'@g' .coverage
+  - pip install coveralls
+  - coveralls
+
+deploy:
+  skip_cleanup: true
+  provider: script
+  script: ./docker-push.sh
+  on:
+    branch: master
+
+after_script:
+  - docker rm -f build-trigger-ci
