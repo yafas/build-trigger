@@ -1,0 +1,14 @@
+Flask==0.12.2
+Werkzeug==0.14.1
+flake8-commas==1.0.0
+flake8-debugger==3.0.0
+flake8-isort==2.3
+flake8-print==3.0.1
+flake8==3.5.0
+flask-shell-ipython==0.3.0
+isort==4.2.15
+marshmallow==2.15.0
+pytest==3.3.2
+pyyaml==3.12
+requests-mock==1.4.0
+requests==2.18.4
