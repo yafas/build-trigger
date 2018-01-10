@@ -3,6 +3,7 @@ import shutil
 
 import pytest
 
+from tests import ApiClient
 from trigger import TriggerApp
 
 SPEC_NAME = 'spec.yaml'
@@ -12,19 +13,19 @@ travis:
 
   repos:
     awesome_repo:
-      awesome/awesome_repo: awesome_trigger_token
+      awesome_trigger_token: awesome%2Fawesome_repo
     yet_another_repo:
-      awesome/yet_another_repo: yet_another_trigger_token
+      yet_another_trigger_token: awesome%2Fyet_another_repo
 """
 SPEC_DICT = {
     'travis': {
         'secret_key': 'lolkekmakarek',
         'repos': {
             'awesome_repo': {
-                'awesome/awesome_repo': 'awesome_trigger_token',
+                'awesome_trigger_token': 'awesome%2Fawesome_repo',
             },
             'yet_another_repo': {
-                'awesome/yet_another_repo': 'yet_another_trigger_token',
+                'yet_another_trigger_token': 'awesome%2Fyet_another_repo',
             },
         },
     },
@@ -61,4 +62,11 @@ def app(config) -> TriggerApp:
     app = TriggerApp('trigger', config=config)
     app.app_context().push()
 
+    app.test_client_class = ApiClient
+
     return app
+
+
+@pytest.fixture
+def client(app):
+    return app.test_client()
