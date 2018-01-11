@@ -12,10 +12,10 @@ def handle_travis_error(error):
 
 class Trigger(MethodView):
 
-    def get(self, **kwargs):
+    def post(self, **kwargs):
         project_path, errors = TravisProjectSchema().load(kwargs)
         if errors:
             return errors, 400
 
         trigger_travis(project_path)
-        return {'message': ['"awesome_repo" triggered.']}, 200
+        return {'message': ['"awesome_repo" triggered.']}, 201
