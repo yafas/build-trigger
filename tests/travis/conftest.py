@@ -29,6 +29,7 @@ def mock_travis(travis_api, travis_repos):
         for repo in travis_repos():
             mocker.post(
                 f'https://api.travis-ci.org/repo/{repo}/requests',
+                status_code=202,
                 json=travis_api)
         yield
 

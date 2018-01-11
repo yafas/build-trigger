@@ -21,5 +21,5 @@ def travis_headers() -> dict:
 
 def trigger_travis(project_path: str):
     response = requests.post(repo_url(project_path), headers=travis_headers())
-    if response.status_code != 200:
+    if response.status_code != 202:
         raise TravisApiError('Travis errored.')
