@@ -1,4 +1,5 @@
 from dotenv_config import Config
+from raven.contrib.flask import Sentry
 
 from trigger import TriggerApp
 
@@ -9,3 +10,5 @@ config = dict(
 )
 
 app = TriggerApp(__name__, config=config)
+
+sentry = Sentry(app, dsn=conf_loader('BUILD_TRIGGER_SENTRY_DSN', default=None))
