@@ -10,6 +10,7 @@ flask-shell-ipython==0.3.0
 gunicorn==19.7.1
 isort==4.2.15
 marshmallow==2.15.0
+pycodestyle==2.3.1
 pytest==3.3.2
 pyyaml==3.12
 raven[flask]==6.5.0
