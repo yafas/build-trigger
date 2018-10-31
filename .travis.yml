@@ -8,8 +8,8 @@ services:
   - docker
 
 install:
-  - docker build -t yafas/build-trigger .
-  - docker run -dit --name build-trigger-ci -v $TRAVIS_BUILD_DIR/.env.ci:/app/.env yafas/build-trigger
+  - docker build -t sivakov512/build-trigger .
+  - docker run -dit --name build-trigger-ci -v $TRAVIS_BUILD_DIR/.env.ci:/app/.env sivakov512/build-trigger
   - docker exec build-trigger-ci pip install coveralls
 
 script:
