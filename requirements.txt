@@ -38,7 +38,7 @@ pyflakes==2.0.0
 Pygments==2.2.0
 pytest==3.9.3
 python-dotenv==0.9.1
-PyYAML==3.13
+PyYAML==4.2b4
 raven==6.9.0
 requests==2.20.0
 requests-mock==1.5.2
